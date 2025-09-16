@@ -1,0 +1,220 @@
+**Laravel Blade Template
+      Blade Template
+      |
+      Template Engine Based On PHP
+=>Blade Provides a Clean and Convenient way to create views in Laravel
+|
+**Benefits:Create Dynamic and Reusable Templates**
+|
+**Laravel Blade Template Syntax ***
+** In php **  
+<?php  
+
+echo "Hello"
+
+$name;
+
+echo "<h2> Hello</h2>";
+
+?>
+
+<?php   //inside php code  ?>
+<?php   //comment  ?>
+**In Laravel ***
+notes:Prevent cross:site scripting (xss)attacks
+
+
+{{"Hello"}}
+
+{{$name}}
+
+{!! "<h2> Hello</h2>" !!}
+
+@php  // inside code php   @endphp
+
+{-- Laravel comment--}
+
+*** Blade Control Structures Syntax
+@if(condition)
+//statement
+@elseif(condition)
+//statement
+@else
+//statement
+@endif
+
+@switch($i)
+    @case(1)
+      ///firstCase
+      @break(2)
+      //second case
+      @break
+      @default
+      //default case
+      @endswitch
+
+<?php if(isset($rcord)){
+    //statement in php } ?>
+
+@isset($records)
+//$records is defined and is not null
+@endisset
+
+
+@empty($records)
+//$records is empty
+@endempty
+
+@for($i=0; $i<10;$i++) 
+//The current value {{$i}}
+@endfor
+
+@foreach($users as $user)
+<p> This is user {{$user}}</p>
+@endforeach
+@while(condition)
+//statement
+@endwhile
+
+otherloop for value or not 
+@forelse ($users as $user)
+<li> {{ $user->name}}</li>
+@empty
+no value found
+@endforelse
+
+@continue    @break
+******* print in laravel ******
+   {{ }}
+<h2>Home : First Page</h2>
+<h4>Larvel : Calculator :{{ 5+ 2}}</h4> 
+<h4>Larvel : Statment print: {{ "Hello World" }}</h4> 
+{{"Or directly print this"}}  <br>
+{{"<h1>With tag and value print</h1>"}}<br>
+{!!"<h1> tag value print</h1>"!!}
+{{ "<script>alert('With tag print js')</script>" }} <br>
+{{-- {!! "<script>alert('With tag value print js')</script>" !!} --}}
+{{-- comment --}}
+
+@php 
+$name = "Rakib variable print";
+$names = ["Rakib","Rakib2","Rakib3"];
+@endphp
+
+{{$name}}    {{---- variable print before intialize value --}}<br>
+@{{$name}}   {{---- same deto print --}}<br>
+
+{{---- loop print ----}}
+<ul>
+    @foreach ($names as $n)
+        <li>{{$n}}</li>
+    @endforeach
+</ul>
+
+**Blade loop variable for @foreach***
+Property                 Description
+$loop->index             The index of the current iteration(0 to 1,2..)
+$loop->remaining         The number of remaining items
+$loop->first             Whether the current iteration is the first iteration
+$loop->last              Whether the current iteration is the last iteration
+$loop->iteration         The current iteration(1 to 2,3..)
+$loop->count             The number of items in the loop or array
+$loop->even              Whether the current iteration is even
+$loop->odd               Whether the current iteration is odd
+$loop->depth             The depth of the current loop 
+$loop->parent            When in a nested loop, The parent loop variable
+
+{{-- **Blade loop variable for @foreach*** --}}
+@php $array=["Rakib","Rakib2","Rakib3","Hello","World"];
+     $arry2=['apple','banana','orange'];
+     $arry3=["january","february","march"];
+     $array4=["blue","green","red","yellow","white"];
+     $number=[1,2,3,4,5,6,7,8,9,10];
+
+@endphp
+<ul>
+    @foreach ($array as $a)
+       | <li>{{$loop->index}} - {{$a}}</li>
+    @endforeach
+</ul>
+<ul>
+    @foreach ($arry2 as $a)
+       | <li>{{$loop->iteration}} - {{$a}}</li>
+    @endforeach
+</ul>
+
+<ul>
+    @foreach ($arry3 as $a)
+       | <li>{{$loop->count}} - {{$a}}</li>
+    @endforeach
+</ul>
+
+{{-- loop with condition --}}
+<ul>
+    @foreach ($array4 as $a)
+    @if($loop->first)
+       | <li style="color:red">- {{$a}}</li>
+       @elseif($loop->last)
+       | <li style="color:green">- {{$a}}</li>
+       @else
+       | <li style="color:blue">{{$a}}</li>
+       @endif
+    @endforeach
+</ul>
+
+{{-- loop with condition even odd --}}
+<ul>
+    @foreach ($number as $a)
+    @if($loop->even)
+       | <li style="color:red">- {{$a}}</li>
+       @elseif($loop->odd)
+       | <li style="color:green">- {{$a}}</li>
+       @else
+       | <li style="color:blue">{{$a}}</li>
+       @endif
+    @endforeach
+</ul>
+
+***Blade Template Main Directive***
+@include 
+@section
+@extend
+@yield
+
+***Reusable Templates ***
+      @include()
+
+header.blade.php
+{{ <p> {{$website_name}} </p> }}    
+  
+ @foreach ($fruits as $n  )
+        <p>  {{$n}} </p>  @endforeach
+
+Home.blade.php
+@php  $fruits=["apple","banana","orange","Grapes"]  @endphp
+@include('first',['status'=>"Hello"])
+@include('first',['names'=>$fruits])
+
+first.blade.php             
+<h2>First Page</h2>
+{{$status}}
+|
+|include view
+|
+second.blade.php
+<h2>second Page</h2>
+@include('first')
+
+**** @includeIf()
+$$ if view Exits then add not Exits then not showing error $$
+
+*** include Subviews with condition Check
+**** include with condition
+@@ if condition true
+@includeWhen(Conditon value,"viewsFiles",['status'=>'Hello'])
+                 true|false
+Example:@includeWhen($Booean,"page.header",['names'=>$fruits]) //$Booean=true;
+@@ if condition false   $bool=false;     
+@includeUnless(Conditon value,"viewsFiles",['status'=>'Hello'])       
+Example:@includeUnless(false,"page.header",['names'=>$fruits])
+Example:@includeUnless($bool,"page.header",['names'=>$fruits])

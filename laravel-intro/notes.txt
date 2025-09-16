@@ -1,0 +1,523 @@
+laravel introduction
+Require knowledge to learn laravel
+PHP (STRONG OOP knowledge)
+MYSQL
+
+Laravel is an open source PHP framework that provides a set of tools and resources for developing web applications.
+DEVELOPER:Taylor Otwell in 2011
+
+Laravel is commonly used for:
+   - Rapid prototyping and development of web applications
+   - Building robust and scalable web applications
+   - Creating web applications with complex business logic
+   -create APIs
+
+1. Installation:
+   - Install Composer, a dependency manager for PHP.
+   - Create a new Laravel project using the command: `composer create-project --prefer-dist laravel/laravel projectName`.
+
+2. Configuration:
+   - Set up the environment file (`.env`) with the necessary configuration for database, mail, and other services.
+   - Generate an application key using: `php artisan key:generate`.
+
+3. Routing:
+   - Define routes in the `routes/web.php` file for web interfaces and `routes/api.php` for APIs.
+
+4. Controllers:
+   - Create controllers using the artisan command: `php artisan make:controller ControllerName`.
+   - Define the logic for handling requests in the controller methods.
+
+5. Views:
+   - Use Blade templating engine to create views in the `resources/views` directory.
+   - Pass data from controllers to views.
+
+6. Models and Database:
+   - Define models using: `php artisan make:model ModelName`.
+   - Use Eloquent ORM for database operations.
+   - Run migrations to create database tables: `php artisan migrate`.
+
+7. Middleware:
+   - Implement middleware to handle HTTP requests and responses.
+   - Register middleware in `app/Http/Kernel.php`.
+
+8. Testing:
+   - Write tests using PHPUnit, which is included with Laravel.
+   - Run tests using the command: `php artisan test`.
+
+By following these steps, you can effectively develop and manage web applications using Laravel.
+
+  WHAT IS MVC pattern
+- Follows the Model View Controller (MVC) design pattern:
+ - Model represents the database and business logic SQL Query
+ - View is responsible for rendering the user interface(html interface)
+- Controller handles user input and communicates(business logic) with    the model and view  
+   view=====Controller====Model
+Laravel usage involves several steps to set up and develop a web application. Here is a brief overview:
+
+How to Code in MVC framework???
+To code in the MVC framework using Laravel, follow these steps:
+
+1. **Set Up Laravel Project:**
+   - Start by installing Laravel using Composer: `composer create-project --prefer-dist laravel/laravel projectName`.
+
+2. **Define Routes:**
+   - Open `routes/web.php` and define your application routes:
+     ```php
+     Route::get('/example', [ExampleController::class, 'index']);
+     ```
+
+3. **Create Controller:**
+   - Generate a controller using Artisan: `php artisan make:controller ExampleController`.
+   - Define methods in the controller to handle requests:
+     ```php
+     namespace App\Http\Controllers;
+
+     use Illuminate\Http\Request;
+
+     class ExampleController extends Controller
+     {
+         public function index()
+         {
+             return view('example');
+         }
+     }
+     ```
+
+4. **Create Model:**
+   - Generate a model using Artisan: `php artisan make:model Example`.
+   - Use Eloquent ORM for database interactions:
+     ```php
+     namespace App\Models;
+
+     use Illuminate\Database\Eloquent\Factories\HasFactory;
+     use Illuminate\Database\Eloquent\Model;
+
+     class Example extends Model
+     {
+         use HasFactory;
+     }
+     ```
+
+5. **Create View:**
+   - Create a Blade template in `resources/views/example.blade.php`:
+     ```html
+     <!DOCTYPE html>
+     <html>
+     <head>
+         <title>Example Page</title>
+     </head>
+     <body>
+         <h1>Hello, this is an example page!</h1>
+     </body>
+     </html>
+     ```
+
+6. **Database Migrations:**
+   - Create and run migrations to set up database tables: 
+     ```shell
+     php artisan make:migration create_examples_table
+     php artisan migrate
+     ```
+By following these steps, you can implement the MVC pattern using Laravel, separating application logic into models, views, and controllers.
+
+Benefits of MVC framework:
+**Open Source,Elegant syntax,MVC architecture
+**database migrations and ORM
+** CMD(Command-line-inerface)(composer)
+**Power Template engine(Blade Template)
+**Testing and debug
+**Security (csrf,sql injection)
+- **Separation of Concerns**: MVC architecture separates the application into three main components: Model, View, and Controller, promoting organized and maintainable code.
+- **Scalability**: The separation allows teams to work independently on different components, making it easier to scale and manage large applications.
+- **Reusability**: Components can be reused across different parts of the application or in other projects, reducing redundancy and development time.
+- **Testability**: With a clear separation of business logic (Model) from the user interface (View), the application becomes easier to test and debug.
+- **Improved Collaboration**: Developers can work on the backend logic while designers focus on the user interface, enhancing team collaboration and efficiency.
+**Easy to modify
+
+PHP MVC Framework
+- Laravel
+- Symfony
+- CodeIgniter
+- Yii Framework
+- Zend Framework
+- CakePHP
+- Phalcon
+- Slim
+- FuelPHP
+- Laminas Project
+
+**Other Programming Languages MVC Frameworks:**
+- Java: Spring, Hibernate
+- Python: Django, Flask
+- JavaScript: React, Angular
+- C#: ASP.NET, Entity Framework
+- Ruby: Ruby on Rails
+
+WHAT is Framework??
+A framework is a platform or foundation for developing software applications. It provides a set of pre-written code, libraries, and tools that help developers create applications more efficiently. Frameworks establish a standard way to build and deploy applications
+pre-written Code & libraries
+tools,components,models
+   Example:
+   database Components,caching,Pagination,Session managemnet
+   Form handling,Security mechanisms,User Auth,APis,payment Gateway
+Laravel Topic
+Artisan CLI
+Routing,Views,Blade Template,Controller,Model,Database, Eloquent ORM
+Migrations,Middleware,Form Validation,Authentication,APIs Validation
+Crud Project,Websites Project 
+Install process
+A. per project installation
+composer create-project laravel/laravel:^11.0 Eloquent
+composer create-project laravel/laravel:^10.0 example-app
+B. Global installation
+composer global require laravel/installer
+laravel new example-app
+c. BACK FORWARD FOLDER
+cd.. for back folder open your folder cd foldername
+Open your favorite browser and Proceed to : http://localhost:8000/student
+
+Lession -2
+Laravel Folder Structure:
+- app
+  - Console
+  - Exceptions
+  - Http
+    **- Controllers
+    - Middleware
+    - Requests
+    - Resources
+   ** - views
+ ** - Models
+  - Providers
+- bootstrap
+- config
+- database
+  - factories
+  - migrations
+  - seeds
+**- public
+  - css
+  - js
+  - storage
+- resources
+  - js
+  - lang
+  - sass
+  **- views
+**- routes
+         web.app
+- storage
+  - app
+  - framework
+  - logs
+- tests
+- vendor
+
+1.Model folder ======database/sql Query
+2.Controller=========business logic files
+3.Views Folder========HTML files
+4.Routing=====URL definig files
+5.Assets folder(public)=====images/fonts/Music/Videos files
+                     css/JavaScript file
+
+                    ***lession 3
+                    
+***laravel Routing ***
+Route====>URL  === webpage URL
+                   APIs URL
+**Pure PHP 
+http://localhost/about.php
+http://localhost/pages/about.php
+Notes:See Everyone That page build in php
+**But in larvel remove this negativity
+http://localhost/about
+                   ||
+                   Route Name
+                   ||
+                   hello.php(view files/controller files)
+**routes/web.php 
+Routes::Get('/about',function(){
+    return view("hello")
+});  
+
+**GO routes/createnew-filename.php
+web.php
+use Illuminate\Support\Facades\Route;
+**home page Route
+Route::get('/', function () {
+    return view('welcome');
+});
+**Route syntax methods 1
+Route::get('routename',function(){
+return view("blade page or what You Return code")})
+
+** My route
+Route::get('/myfront', function () {
+    return view('myfront');
+ });
+ **Route with retrn 2nd parameter call from blade {{message}}
+ Route::get('/myfront', function () {
+    return view('myfront', ['message' => 'This is message from routes para']);
+});
+
+**this is hello page of laravel But route About
+Route::get('/about',function(){
+    return view("hello");
+});
+** Route direct view return HTML elements 
+Route::get('/direct',function(){
+    return "<h2>Without blade page return this</h2>";
+});
+
+***Route syntax in singleline method 2
+Route::view('/routename',"blade name or what You return code");
+Example:
+**route synatx in single line para 1 route para2 view
+Route::view('/posts','post');
+**You can change Route name does'nt effect in view page
+
+***Call route from URL anchor tag From blade page
+<a href="/posts">POST PAGE</a><br><br>
+<button style="padding: 4px;background-color: green">
+<a href="/posts">POST BUtton</a></button>
+
+*** subRoute 
+Route::get('/direct/subRoute',function(){
+    return "<h2>This route is subRoute</h2>";
+});
+
+** When Your view is not runing Then 
+we can see Laravel live testing in browser
+Go Route browser right click inspect->network
+See All information like route ,respone preview timing Cookie,Headers
+
+**CMD
+CLEAR YOUR TERMINAL CLS ENTER
+** php artisan route
+** php artisan route -h  * --for -h means that related command
+&& output
+Available commands for the "route" namespace:
+  route:cache  Create a route cache file for faster route registration
+  route:clear  Remove the route cache file
+  route:list   List all registered routes
+
+  php artisan route:list
+  && output: showing all route inclue package and self create both
+  GET|HEAD   / ................................................
+  POST       _ignition/execute-solution ignition.executeSolution ...
+  GET|HEAD   _ignition/health-check ignition.healthCheck › ...
+  POST       _ignition/update-config ignition.updateConfig....
+  GET|HEAD   about ...........................................
+  GET|HEAD   direct ..........................................
+  GET|HEAD   direct/subRoute ................................
+  GET|HEAD   myfront .........................................
+  GET|HEAD   posts ..........................................
+  GET|HEAD   up .............................................
+
+                                              Showing [10] routes
+ php artisan route:list --except-vendor
+  && output: showing all  self created route only 
+
+  GET|HEAD       / ....................................
+  GET|HEAD       about ................................
+  GET|HEAD       direct ...............................
+  GET|HEAD       direct/subRoute .....................
+  GET|HEAD       myfront .............................
+  GET|HEAD       posts ...............................
+
+                                              Showing [6] routes
+                                                    
+php artisan route:list --path=my-route-name
+php artisan route:list --path=post
+php artisan route:list --path=get
+  && output: showing all  particular route related post only 
+  GET|HEAD       posts .....................
+
+                                              Showing [1] routes
+
+
+**Laravel Routing Parameters & Constraints**
+ **Routing Parameter
+http://localhost/posts/10
+http://localhost/posts/rupeshtech
+http://localhost/posts/news20
+http://localhost/posts/@news20
+
+** Route parameter synatx
+Route::get('/posts'{$id}{ retrn 'User'.$id ;});
+Example:
+Route::get('/posts/{id}',function(string $myidvalue){
+    // return "This is post id="  .$id;
+    return "<h2>This is post id=" . $myidvalue ."<h2>";
+});
+
+***agar user not pass id in route para then error 404 so create default value OR CONDINTION NOT FOUND '
+ Route::get('/checkCondition/{id?}',function(string $idvalue=null){
+   
+    // or set default
+// Route::get('/checkCondition/{id?}',function(string $idvalue="default value"){
+if($idvalue){
+        return "<h2>This is post id=" . $idvalue ."<h2>";
+    }else{
+        return "<h2>Not Found</h2>";
+    }
+ });
+
+  **agar user multiple parameter in route para then 
+ ** CONDINTION NOT FOUND 
+ Route::get('/multipleparameter/{id?}/comment/{commentid?}',function(string $idvalue=null,string $commentidvalue=null){
+    if($idvalue){
+    return "<h1>POST ID:=". $idvalue."</h1><h2>Comment ID:=".$commentidvalue."</h2>";
+    }else{
+        return "<h2>Not Found ID</h2>";
+    }
+ });
+// url http://localhost:8000/multipleparameter/43/comment/45
+
+
+@@@@@@@@@@@@@ Route Constraints @@@@@@@@@@@
+*** we can pass security in route parameter for 
+   datatype like number value , alphabet value,default particular value
+http://localhost/post/10============whereNumber("id")//only number
+
+http://localhost/post/rupeshtech============whereAloha("name")
+
+http://localhost/post/news10============whereAlphaNumeric("name")
+
+*for particular given para already only
+http://localhost/post/song============whereIn("category",["Rupeshtech","admintech","anika"])
+*high security(special character @ # $ % )para start @ route 
+http://localhost/post/@10============>where("id",'[@0-9]+') //only nember
+                                  =>where('id','[a-zA-z]+')           |
+                                                   reqular Expressions
+**USE THIS METHOD 
+Route:get ('/post{id}',function(string $id){
+   return 'User'.$id;
+
+//})->whereNumber('id');
+//})->where("id",'[@0-9]+');// only number pass special character (@ # $ %) not allow
+//})->where('id','[a-zA-z]+') ;// only alphabet pass special character (@ # $ %) not allow
+//})->whereIn("category",["Rupeshtech","admintech","anika"]);
+// //for particular given para already only
+check url http://localhost:8000/RouteConstraints/Rupeshtech
+
+
+
+
+lession -4
+@@@@@@@@@@@@ Laravel Named Route & Routes Group  @@@@@@@@@@
+
+Laravel Named Route
+if one route use in multiple place that time if we have to change route name 
+this situation we have to change everyplace so remove this negativity use 
+"Named Route" Without changing everyplace routename
+
+Example 👍
+Before::
+Route::get('/page/about',function(){
+   return "About Page";
+})
+fisrt.blade.php
+<a href ="/page/about">About</a>
+
+second.blade.php
+<a href ="/page/about">About</a>
+
+third.blade.php
+<a href ="/page/about">About</a>
+notes::negativity when you change route |everwhere have to change without using name-route
+
+***After change route name using "Named Route"use
+benifit //whenever You want change route name does'nt effect Your Route 
+Route::get('/page/about-us',function(){
+   return "About Page";
+})->name('about');
+
+**now for php code in html page use {{}}
+fisrt.blade.php
+<a href ="{{route('about')}}">About</a>
+
+second.blade.php
+<a href ="{{route('about')}}">About</a>
+
+third.blade.php
+<a href ="{{route('about')}}">About</a>
+
+***  redirect function******
+// when You want to redirect another link or page like user find wrong route or wrong like 
+redirect take two parameter first byuserroute and 2nd whats route You want to open by you
+synatx
+Route::redirect('/byuserRoute','whatRoute-open')
+Route::redirect('/byuserRoute','whatRoute-open',301)//301 for permanenty
+Route::redirect('/aboutR','testR')
+
+// http status code
+// 404 - page not found
+// 500 - internal server error
+// 301 - permanent redirect
+// 302 - temporary redirect
+
+**
+Laravel Route Groups
+**
+__when you have multiple route in save prefix example:
+Route::get('admin/home',function(){});
+Route::get('admin/about',function(){});
+Route::get('admin/contact',function(){});__
+
+__when multiple route have same prefix name
+//so we can use route group
+Route::prefix('admin')->group(function () {
+    Route::get('/home', function () {
+        return "Admin Home";
+    });
+
+    Route::get('/about', function () {
+        return "Admin About";
+    });
+
+    Route::get('/contact', function () {
+        return "Admin Contact";
+    });
+});
+// url http://localhost:8000/admin/home
+// url http://localhost:8000/admin/about
+// url http://localhost:8000/admin/contact
+
+
+   **  404 not found
+   Self created ERROR PAGE  use fallback fn
+                     ****
+Route::fallback(function(){
+    return "<h2>404 Page Not Found</h2>";
+});
+  
+
+
+** bootstrap installation in laravel
+1.npm i -D bootstrap @popperjs/core sass
+  npm run dev
+  or
+  npm i --save bootstrap @popperjs/core
+  npm i --save-dev sass
+
+*open package.json
+check devDependencie
+   "@popperjs/core": "^2.11.8",
+
+*2. resources ->sass or css folder->create  file app.scss  or app.css
+code
+@import 'bootstrap/scss/bootstrap';
+
+
+*3.resources ->js -> app.js 
+ code 
+import './bootstrap';
+import * as bootstrap from 'bootstrap';
+
+4.view blade page
+code
+{{-- @vite(['resources/css/app.css','resources/js/app.js']) --}}
+ @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+ 
+Then Go browser check

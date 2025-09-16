@@ -1,0 +1,91 @@
+** Controller **
+For Controller :Here is using PHP OOP
+Controller Role in MVC Framework
+   ..........Controller........
+   |              |           |
+send-data    request   respone&request
+   |                |         |
+  view--respone... user....  Model
+ ** Make Controller::::::::
+ **1.create Controller file
+ *php artisan make:controller YouControllername
+ *php artisan make:controller UserController
+ **2.create Controller class in Your UserControlle.php
+  class UserController extends Controller {
+     public function show()
+     {
+        return view('user.profile')
+     }
+  }
+
+**3.create Route::::
+use App\Http\Controller\UserControlle;
+Route::get('/user',[yourControolername::class,'methodname']);
+Route::get('/user',[UserControlle::class,'show']);
+http://localhost/user
+
+** Create method after Controller
+ **Inside Controller
+     public function showUser(){
+        // return "<h1>Welcome to Controller</h1>";
+        return view('user');
+    }
+ ** Inside Route   
+ Route::get('/user', [PageController::class, 'showUser']);
+
+ ** create user.blade.php
+ **last open server and routes
+
+** Pass the value inside Contrller with the help of Route
+**in route
+Route::get('/user/{id}', [PageController::class, 'showUser'])->name('user');
+**in Controller
+public function showUser(string $id){
+        // return "<h1>Welcome to Controller</h1>";
+        return view('user',['id'=>$id]);
+        *or use compact for same name key and varable
+        return view('user',compact('id'));
+    }
+** Go View files
+<h1>User Page</h1>
+<h2> Hi Your ID: {{ $id }}</h2>
+**Start server
+http://127.0.0.1:8000/user/2
+
+** Create anchor Tag  with Contrller **
+{{-- here is using route name --}}
+ <a href="{{ route('home') }}">Home</a>
+ <a href="{{ route('blog') }}">Blog</a>
+
+  ** Controller Group  Routes
+  Route::controller(PageController::class)->group(function(){
+
+    Route::get('/', 'showHome')->name('home');
+    Route::get('/user', 'showUser')->name('user');
+    Route::get('/blog', 'showblog')->name('blog');
+
+});
+
+***  Single Action Contrller  **
+php artisan make:controller TestController --invokable
+or
+Php artisan make:controller TestController --i
+  In Contrller @@
+
+class TestController extends Contrller{
+    public function __invoke(){
+        return view(test);
+    }
+}
+' invokable ' when You Contrller This method is calling auto
+  In Route @@@
+  use App\Http\Controllers\TestController; //add path
+  Route::get('/test',TestController::class) //call without method name
+
+  *** check Your Routes list
+  php artisan route:list --except-vendor
+  *** For specfic route
+  php artisan route:list --path=user
+
+***** Laravel Database Migration MODEL ****
+***PHP WITH MYSQL 

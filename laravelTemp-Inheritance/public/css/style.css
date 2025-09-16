@@ -1,0 +1,78 @@
+/* Reset and base styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+
+/* Header styles */
+header {
+  background: #004080;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header nav {
+  margin-top: 10px;
+}
+
+header nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Layout container */
+.container {
+  display: flex;
+  min-height: 80vh;
+}
+
+/* Sidebar styles */
+aside {
+  width: 200px;
+  background: #e0e0e0;
+  padding: 20px;
+}
+
+aside ul {
+  list-style: none;
+}
+
+aside ul li {
+  margin-bottom: 10px;
+}
+
+aside ul li a {
+  text-decoration: none;
+  color: #004080;
+}
+
+aside ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Main content area */
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Footer styles */
+footer {
+  background: #004080;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}

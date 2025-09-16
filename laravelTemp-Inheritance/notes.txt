@@ -1,0 +1,206 @@
+
+ ** Blade Template:Inheritance **
+ **Blade Template:Inheritance is a very powerful feature of Blade templating engine.Using Blade Template:Inheritance we can create a parent template and extend it as many times as we need to. The parent template is defined with the `@section` and `@show` directives. The child template which extends the parent template is defined with the `@extends` directive.**
+
+@parent
+layout.blade.php
+ header content
+ body conent empty
+      Home
+@yield('content')
+footer conent
+
+Example:
+home.blade.php
+@extend("layout")
+@section('content')
+     <h2>Home Page </h2> @endsection
+
+  
+  masterlayout.blade.php
+ ** create css folder files in public folder 
+    <link rel="stylesheet" href="/css/style.css"> //this relative path
+     <link rel="stylesheet" href="{{ asset('css/style.css') }}">//absulte path
+     <main>
+     <article>
+        @yield('content')
+      </article>
+   </main>
+
+    ** @yield('content')
+    ** @yield('content',"<h2>Default content</h2>")
+        *here is print with tag
+    ** this directive define(area) a dyamics directive
+
+ ** After That Go View Page
+ ** For Use in Other Page use(@extends)
+  Welcome.blade.php
+   @extends('layouts.masterlayout') 
+
+** Dynamics Content change use (@section) **
+ Welcome.blade.php
+ @section('content')
+    <h2>Home Page </h2> 
+    @endsection
+**for 2nd parameter in view files
+@hasSection('content')
+ @yield('conent')
+ @else <h2> No Content Found.</h2> @endif
+ 
+ ** page titleChange
+ Open In masterlayout.blade.php
+ <title>MasterLayout - @yield('title')</title>
+  <title>MasterLayout - @yield('title', 'Default Title')</title>
+
+  Go View Page welcome.blade.php
+     @section('title')
+       Home
+      @endsection
+
+** we want only some page dynamic content show use
+masterlayout.blade.php
+  @section('sidebar')
+  @show
+ **Go View files
+ @section('sidebar')
+ @parent  // this parent sidebar visible
+ <p> This is a simple laravel web framework.</p>
+ @endsection
+
+ ** Topic laravel Blade Template JavsScripts In Blade**
+   ** How To Use PHP Value In JavsScripts
+ @php 
+ $user="RUPESH TEHCHNOLOGY";
+ $fruits =["Apple","Banana","Grapes","Orange"] ;  @endphp
+<script> 
+var data ={{ $user}}   //here is showing error
+console.log(data);
+
+** for print this type Variable Use @Json
+var data =@json( $user) //this is right way 
+console.log(data);
+** PHP array Print in JavsScripts
+var Adata =@json($fruits);
+console.log(Adata);
+// ** This is Print in Browser Views using js foreach loop
+Adata.forEach(function(entry){
+   console.log(entry);
+});
+ </script
+******NB  JavsScripts forEach **
+var a=["ram","kumar","kumar","kumar","kumar","kumar"];
+        a.forEach(function(value,index){
+            console.log(value,index);
+        });
+  **********
+ //--*** Blade WAY PRINT ***  -
+var Bdata ={{ Js::from($fruits) }};
+console.log(Bdata);
+
+ *** TOPIC jS IN Template Inheritance 
+That means for use js Dynamics useing
+@push('script') @endpush
+@push directive also use for CSS ***
+
+MasterLayout  (area define for use js)
+..........
+........
+.. @stack('script')
+........
+
+home.blade.php
+@push('script')
+  <script src="/example.js"></script>  
+    <script src="/bootstrap.js"></script>  
+    <script src="/jquery.js"></script>  
+    notes You can add multiple files here
+ @endpush
+
+about.blade.php
+
+🔍 Key Differences
+Feature  	@yield	 ---             ----  @push
+Type	   Placeholder for a section	--Stack for accumulating content
+Paired With	@section	   -------    @stack
+Use Case	Main content areas------- Scripts, styles, meta tags
+Multiple Usage	One per section	----- Can be used multiple times
+Content Control	Replaces placeholder--Appends to stack
+
+** @push  @endpush use for css also
+masterlayout
+@stack('style')
+any.blade.php
+ @push('style')
+<link rel="stylesheet" href="/css/style2.css">
+ @endpush
+
+** @verbatim  @endverbatim dynamic value for JavsScripts
+masterlayout
+@section
+{{message}}  //give error
+ @verbatim {{ message}} @endverbatim
+@endsection
+
+any.blade.php
+ @push('scripts')
+  var message="Hello dynamic js"
+ @endpush
+ @verbatim
+{{ message}}
+ @endverbatim
+
+ *** Topic Passing Data:Route to View****
+Route::get('/users',function(){
+   return view('userpage');
+})
+Route==========passData=======View
+                           userpage.blade.php
+                             <h1>{{$user}}</h1> 
+Route::get('/users', function () {
+    $age=20;
+    return view('userpage',['name'=>"RupeshTech",'age'=>$age]);
+});
+
+** pass js From  Route data array 
+return view('userpage',['name'=>"RupeshTech",'age'=>$age,
+'city'=>'<script>alert("js form route")</script>']);
+** 2nd way return view use with('keyname',"value")
+
+    return view('users')->with('name','RupeshTech')->with('age',20)->with('city','<script>alert("js from route")</script>');
+//3rd way withKeyname('value')
+
+    return view('users')->withName('RupeshTech')->withAge(20)->withCity('<script>alert("js from route")</script>');
+ ** show multiple dimension array value  in route **
+        $names=[
+            1=>['name'=>"RupeshTech",'age'=>20,'city'=>'Delhi'],
+            2=>['name'=>"rjeet",'age'=>32,'city'=>'Goa'],
+            3=>['name'=>"Rohit",'age'=>30,'city'=>'Mumbai'],
+            4=>['name'=>"manish",'age'=>45,'city'=>'Mumbai4']
+        ];
+    return view('users',[
+        'alldata'=>$names,
+        'age'=>20,
+        'city'=>'' // 'city'=>'Delhi'
+    ]);
+  ***  For By pass Id thorght route
+Route::get('/alldatabyid/{id}', function ($id) {
+    return "<h1>USER-ID:". $id ."</h1>";
+})->name('view.alldata');  
+
+any.blade.php
+<h2>Hello  {{$name}}</h2>
+
+{{-- condition for default value --}}
+<h2>CITY: {{ !empty($city) ? $city : 'No City'}}</h2>
+** Show in view for Js
+  {!!$city!!}
+
+{{-- for multiple value show using loop --}}
+@foreach ( $alldata as $id =>$u )
+<h2>{{$id}}. {{$u['name']}} | {{$u['age']}} | {{$u['city']}}</h2>
+@endforeach
+
+{{-- show value throgh Id using loop with anchor tag --}}
+@foreach ( $alldata as $id =>$u )
+<h2>{{$id}}. {{$u['name']}} | {{$u['age']}} | {{$u['city']}} <a href="{{route ('view.alldata',$id)}}">show</a></h2>
+@endforeach

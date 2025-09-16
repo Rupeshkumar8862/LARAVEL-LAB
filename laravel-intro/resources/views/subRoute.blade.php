@@ -1,0 +1,1 @@
+<h2>This calling from route direct parent from subroute</h2>
